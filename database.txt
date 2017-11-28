@@ -1,0 +1,80 @@
+drop table IF EXISTS Attendance_Info;
+drop table IF EXISTS User_info;
+drop table IF EXISTS Subject_Info;
+drop table IF EXISTS Course_Info;
+drop table IF EXISTS Student_Info;
+
+
+
+
+Create table Student_Info (
+	student_Id Int NOT NULL AUTO_INCREMENT,
+	Roll_Number Char(20),
+	name Char(40),
+	course_id Int NOT NULL,
+ Primary Key (student_Id)) ENGINE = MyISAM;
+
+Create table Course_Info (
+	course_id Int NOT NULL AUTO_INCREMENT,
+	branch Char(20),
+	section Char(20),
+	semester Char(20),
+ Primary Key (course_id)) ENGINE = MyISAM;
+
+Create table Subject_Info (
+	subject_Id Int NOT NULL AUTO_INCREMENT,
+	name Char(40),
+	type Char(1),
+	course_id Int NOT NULL,
+	user_Id Int NOT NULL,
+ Primary Key (subject_Id)) ENGINE = MyISAM;
+
+Create table User_info (
+	user_Id Int NOT NULL AUTO_INCREMENT,
+	First_Name Char(40),
+	Last_Name Char(20),
+	User_Name Char(40),
+	Password Char(40),
+ Primary Key (user_Id)) ENGINE = MyISAM;
+
+Create table Attendance_Info (
+	attendance_Id Int NOT NULL AUTO_INCREMENT,
+	student_Id Int NOT NULL,
+	subject_Id Int NOT NULL,
+	Date Date,
+	Time Char(20),
+	attendance Char(2),
+	user_Id Int NOT NULL,
+	course_id Int NOT NULL,
+ Primary Key (attendance_Id)) ENGINE = MyISAM;
+
+
+
+
+
+
+
+
+
+
+
+
+Alter table Attendance_Info add Foreign Key (student_Id) references Student_Info (student_Id) on delete  restrict on update  restrict;
+Alter table Subject_Info add Foreign Key (course_id) references Course_Info (course_id) on delete  restrict on update  restrict;
+Alter table Student_Info add Foreign Key (course_id) references Course_Info (course_id) on delete  restrict on update  restrict;
+Alter table Attendance_Info add Foreign Key (course_id) references Course_Info (course_id) on delete  restrict on update  restrict;
+Alter table Attendance_Info add Foreign Key (subject_Id) references Subject_Info (subject_Id) on delete  restrict on update  restrict;
+Alter table Subject_Info add Foreign Key (user_Id) references User_info (user_Id) on delete  restrict on update  restrict;
+Alter table Attendance_Info add Foreign Key (user_Id) references User_info (user_Id) on delete  restrict on update  restrict;
+
+
+
+
+
+create view view_course_and_its_subjects as SELECT subject_info.subject_id,subject_info.name,subject_info.type,course_info.branch,course_info.section,course_info.semester,user_info.first_name,user_info.last_name from user_info,subject_info,course_info where course_info.course_id=subject_info.course_id and user_info.user_id=subject_info.user_id    
+
+create view attendance_view as SELECT student_info.student_id,student_info.roll_number,student_info.name,subject_info.subject_id,student_info.group_name FROM student_info,subject_info where student_info.course_id=subject_info.course_id
+
+create view View_attendance_By_Subject as SELECT student_info.roll_number,student_info.name,attendance_info.date,attendance_info.time,attendance_info.attendance,attendance_info.student_id,attendance_info.subject_id,attendance_info.user_id,student_info.course_id,student_info.group_name FROM attendance_info,student_info where attendance_info.student_id=student_info.student_id
+
+select subject_id,type from subject_info where type='T' and subject_id in( SELECT subject_id FROM view_attendance_by_subject where course_id=? group by subject_id)

@@ -1,0 +1,108 @@
+@CHARSET "ISO-8859-1";
+
+table
+{ 	
+	width: 300px;
+	font-size: 20px;
+	font-family: Times new roman;
+	border:2px thick #0B615E;
+	border-radius:5px;
+	box-shadow:0px 5px 15px  #0B615E ;
+	color:black;
+	overflow:auto;
+	overflow: hidden;
+	margin:0 auto;
+	white-space:nowrap;
+}
+
+
+input[type=text],[type=password]
+{	
+	font-size: 20px;
+	font-family: Times new roman;
+	border:2px solid #0B615E ;
+	border-radius:5px;
+	height: 30px;
+	width: 200px;
+	color:black;
+	box-shadow:0px 5px 15px  #0B615E;
+}
+
+input[type=radio]
+{	font-size: 20px;
+	font-family: Times new roman;
+	color:black;
+	height: 20px;
+	}
+
+input[type=submit]:hover,input[type=reset]:hover,input[type=button]:hover
+{
+	font-size: 20px;
+	background-color: #0B615E;
+  	border-radius:5px;
+  	border:2px solid #0B615E ; 
+  	font-size:20px;
+  	font-family:Times new roman;
+  	color:white;
+  	box-shadow:0px 5px 15px  #0B615E;
+	}
+
+input[type=submit],input[type=reset],input[type=button]
+{
+	font-size: 20px;
+	background-color: white;
+  	border-radius:5px;
+  	border:2px solid #0B615E ; 
+  	font-size:20px;
+  	font-family:Times new roman;
+  	color:black;
+  	box-shadow:0px 5px 15px  #0B615E;
+	height: 30px;
+}
+
+select
+{
+	font-family: Times new roman;
+	font-size: 20px;
+	border:2px solid #0B615E ;
+	border-radius:5px;
+	
+	box-shadow:0px 5px 15px  #0B615E;
+}
+
+td
+{
+	font-size: 20px;
+	font-family: Times new roman;
+}
+
+a:link {
+	text-decoration:none;
+	font-size: 20px;
+	font-family: Times new roman;
+	color: #0B615E;
+}
+
+/* visited link */
+a:visited {
+	text-decoration:none;
+    font-size: 20px;
+	font-family: Times new roman;
+    color: #0B615E;
+}
+
+/* mouse over link */
+a:hover {
+	text-decoration:blink;
+    font-size: 20px;
+	font-family: Times new roman;
+    color: blue;
+}
+
+/* selected link */
+a:active {
+	text-decoration:none;
+    font-size: 30px;
+	font-family: Times new roman;
+    color: blue;
+}
